@@ -5,6 +5,7 @@ ENV PATH $PATH:/home/vscode/.dotnet:/home/vscode/.dotnet/tools
 
 # Install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y upgrade \
     && apt-get -y install --no-install-recommends software-properties-common
 
 # Install SQL Tools: SQLPackage and sqlcmd

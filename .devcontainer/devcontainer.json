@@ -23,7 +23,7 @@
 						"user": "sa",
 						"password": "${env:MSSQL_SA_PASSWORD}",
 						"emptyPasswordInput": false,
-						"savePassword": false,
+						"savePassword": true,
 						"profileName": "mssql-container",
 						"trustServerCertificate": true
 					}
