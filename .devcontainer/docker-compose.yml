@@ -2,9 +2,9 @@ name: adventure-works-dev-container
 
 services:
   app:
-    container_name: app-source
+    container_name: app-workspace
     build: 
-      context: .
+      context: ./workspace
       dockerfile: Dockerfile
 
     volumes:

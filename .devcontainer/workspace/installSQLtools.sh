@@ -7,7 +7,7 @@ echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-${DISTRO}-
 apt-get update
 ACCEPT_EULA=Y apt-get -y install unixodbc-dev libunwind8 libgssapi-krb5-2 msodbcsql18 mssql-tools18
 
-echo "Adding SQL tools to the path.
+echo "Adding SQL tools to the path."
 echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc
 source ~/.bashrc
 
@@ -18,6 +18,6 @@ unzip sqlpackage.zip -d /opt/sqlpackage
 rm sqlpackage.zip
 chmod a+x /opt/sqlpackage/sqlpackage
 
-echo "Adding SQL Package to the path.
+echo "Adding SQL Package to the path."
 echo 'export PATH="$PATH:/opt/sqlpackage"' >> ~/.bashrc
 source ~/.bashrc

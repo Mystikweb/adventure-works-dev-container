@@ -9,6 +9,15 @@
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {},
 
+    // Mount a volume for the x509 store to persist certificates across container restarts.
+    "mounts": [
+        {
+            "type": "volume",
+            "source": "x509stores",
+            "target": "/home/vscode/.dotnet/corefx/cryptography/x509stores"
+        }
+    ],
+
 	// Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.
@@ -49,6 +58,8 @@
 	//			"protocol": "https"
 	//		}
 	// }
+
+    "onCreateCommand": "bash .devcontainer/onCreateCommand.sh",
 
 	// postCreateCommand.sh is run after the dev container is created. Use it to install tools, set up the dev container, etc.
 	"postCreateCommand": "bash .devcontainer/postCreateCommand.sh"
