@@ -9,8 +9,13 @@
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {},
 
-    // Mount a volume for the x509 store to persist certificates across container restarts.
+    // Mount volumes for the dev certificates and user secrets to be persisted after the dev container is stopped.
     "mounts": [
+		{
+			"type": "volume",
+			"source": "user-secrets",
+			"target": "/home/vscode/.microsoft/usersecrets"
+		},
         {
             "type": "volume",
             "source": "x509stores",

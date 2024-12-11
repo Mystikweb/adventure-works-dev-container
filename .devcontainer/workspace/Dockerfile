@@ -4,6 +4,10 @@ FROM mcr.microsoft.com/devcontainers/dotnet:dev-9.0-noble
 RUN mkdir -p /home/vscode/.dotnet
 RUN mkdir -p /home/vscode/.dotnet/tools
 
+# Create the user folder for the .NET user secrets
+RUN mkdir -p /home/vscode/.microsoft
+RUN mkdir -p /home/vscode/.microsoft/usersecrets
+
 # Add .NET global tools path
 ENV PATH $PATH:/home/vscode/.dotnet:/home/vscode/.dotnet/tools
 
