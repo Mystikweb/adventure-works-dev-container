@@ -27,6 +27,16 @@
 	"customizations": {
 		// Configure properties specific to VS Code.
 		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-dotnettools.csdevkit",
+				"ms-dotnettools.csharp",
+				"ms-dotnettools.vscodeintellicode-csharp",
+				"ms-mssql.mssql",
+				"github.copilot",
+				"github.codespaces"
+			],
+
 			// Set *default* container specific settings.json values on container create.
 			"settings": { 
 				"mssql.connections": [
@@ -43,16 +53,7 @@
 					}
 				],
 				"sqlDatabaseProjects.dotnetSDK Location": "/usr/share/dotnet"
-			},
-			
-			// Add the IDs of extensions you want installed when the container is created.
-			"extensions": [
-				"ms-dotnettools.csdevkit",
-				"ms-dotnettools.csharp",
-				"ms-mssql.mssql",
-				"github.copilot",
-				"github.codespaces"
-			]
+			}
 		}
 	},
 
