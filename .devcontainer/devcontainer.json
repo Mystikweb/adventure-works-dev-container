@@ -52,18 +52,19 @@
 						"trustServerCertificate": true
 					}
 				],
+				"remote.localPortHost": "allInterfaces",
 				"sqlDatabaseProjects.dotnetSDK Location": "/usr/share/dotnet"
 			}
 		}
 	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [5000, 5001],
-	// "portsAttributes": {
-	//		"5001": {
-	//			"protocol": "https"
-	//		}
-	// }
+	"forwardPorts": [5017, 7284],
+	"portsAttributes": {
+		"7284": {
+			"protocol": "https"
+		}
+	},
 
     "onCreateCommand": "bash .devcontainer/onCreateCommand.sh",
 
