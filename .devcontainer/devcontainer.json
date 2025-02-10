@@ -1,0 +1,76 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/dotnet-mssql
+{
+	"name": "Adventure Works Example Dev Container",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {},
+
+    // Mount volumes for the dev certificates and user secrets to be persisted after the dev container is stopped.
+    "mounts": [
+		{
+			"type": "volume",
+			"source": "user-secrets",
+			"target": "/home/vscode/.microsoft/usersecrets"
+		},
+        {
+            "type": "volume",
+            "source": "x509stores",
+            "target": "/home/vscode/.dotnet/corefx/cryptography/x509stores"
+        }
+    ],
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-dotnettools.csdevkit",
+				"ms-dotnettools.csharp",
+				"ms-dotnettools.vscodeintellicode-csharp",
+				"ms-mssql.mssql",
+				"github.copilot",
+				"github.codespaces"
+			],
+
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+				"mssql.connections": [
+					{
+						"server": "localhost,1433",
+						"database": "",
+						"authenticationType": "SqlLogin",
+						"user": "sa",
+						"password": "${env:MSSQL_SA_PASSWORD}",
+						"emptyPasswordInput": false,
+						"savePassword": true,
+						"profileName": "mssql-container",
+						"trustServerCertificate": true
+					}
+				],
+				"remote.localPortHost": "allInterfaces",
+				"sqlDatabaseProjects.dotnetSDK Location": "/usr/share/dotnet"
+			}
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [5017, 7284],
+	"portsAttributes": {
+		"7284": {
+			"protocol": "https"
+		}
+	},
+
+    "onCreateCommand": "bash .devcontainer/onCreateCommand.sh",
+
+	// postCreateCommand.sh is run after the dev container is created. Use it to install tools, set up the dev container, etc.
+	"postCreateCommand": "bash .devcontainer/postCreateCommand.sh"
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}

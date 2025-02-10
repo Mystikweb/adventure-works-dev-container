@@ -1,0 +1,6 @@
+@AdventureWorksDevContainer.Host_HostAddress = http://localhost:5017
+
+GET {{AdventureWorksDevContainer.Host_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,37 @@
+name: adventure-works-dev-container
+
+services:
+  app:
+    container_name: app-workspace
+    build: 
+      context: ./workspace
+      dockerfile: Dockerfile
+
+    volumes:
+      - ../..:/workspaces:cached
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+    network_mode: service:db
+
+    # Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    # user: root
+
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+
+  db:
+    container_name: app-db
+    build: 
+      context: ./mssql
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: Y
+    env_file:
+      - .env
+
+    # Add "forwardPorts": ["db:1433"] to **devcontainer.json** to forward MSSQL locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
