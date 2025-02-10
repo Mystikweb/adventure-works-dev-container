@@ -1,11 +1,25 @@
+using AdventureWorksDevContainer.Host.GraphQL;
+using GraphQL;
+using GraphQL.Execution;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDataServices(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddGraphQL(b => b
+    .AddSystemTextJson()
+    .AddGraphTypes()
+    .AddClrTypeMappings()
+    .AddSchema<AdventureWorksSchema>()
+    .AddExecutionStrategy<SerialExecutionStrategy>(GraphQLParser.AST.OperationType.Query)
+);
 
 var app = builder.Build();
 
@@ -18,6 +32,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseGraphQL();
+app.UseGraphQLAltair();
 
 var summaries = new[]
 {

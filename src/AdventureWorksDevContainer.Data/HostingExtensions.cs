@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AdventureWorksDevContainer;
+using AdventureWorksDevContainer.Data;
+using AdventureWorksDevContainer.Data.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AdventureWorksDevContainer.Data;
+namespace Microsoft.Extensions.Hosting;
 
 public static class HostingExtensions
 {
@@ -13,8 +16,9 @@ public static class HostingExtensions
                 configure.UseNetTopologySuite()
                     .UseHierarchyId()));
 
-        // services.AddScoped<IProductRepository, ProductRepository>();
-        // services.AddScoped<IPersonRepository, PersonRepository>();
+        services.AddAutoMapper(typeof(HostingExtensions).Assembly);
+
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
 
         return services;
     }
