@@ -42,9 +42,54 @@ public sealed class CustomerRepository(ILogger<CustomerRepository> logger,
     {
         var customer = await context.VIndividualCustomers
             .Where(c => c.FirstName == firstName && c.LastName == lastName)
+            .AsNoTracking()
             .FirstOrDefaultAsync(cancellationToken);
 
         return mapper.Map<CustomerViewModel?>(customer);
+    }
+
+    public async Task<IEnumerable<CustomerViewModel>> SearchAsync(CustomerSearchParameters searchParameters, CancellationToken cancellationToken = default)
+    {
+        var query = context.VIndividualCustomers.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(searchParameters.AddressType))
+            query = query.Where(c => c.AddressType == searchParameters.AddressType);
+
+        if (!string.IsNullOrWhiteSpace(searchParameters.City))
+            query = query.Where(c => c.City == searchParameters.City);
+
+        if (!string.IsNullOrWhiteSpace(searchParameters.CountryRegionName)) 
+            query = query.Where(c => c.CountryRegionName == searchParameters.CountryRegionName);
+
+        if (!string.IsNullOrWhiteSpace(searchParameters.Demographics))
+            query = query.Where(c => c.Demographics == searchParameters.Demographics);
+
+        if (!string.IsNullOrWhiteSpace(searchParameters.EmailAddress))
+            query = query.Where(c => c.EmailAddress == searchParameters.EmailAddress);
+
+        if (!string.IsNullOrWhiteSpace(searchParameters.FirstName))
+            query = query.Where(c => c.FirstName.Contains(searchParameters.FirstName));
+
+        if (!string.IsNullOrWhiteSpace(searchParameters.LastName))
+            query = query.Where(c => c.LastName.Contains(searchParameters.LastName));
+
+        if (!string.IsNullOrWhiteSpace(searchParameters.PhoneNumber))
+            query = query.Where(c => c.PhoneNumber == searchParameters.PhoneNumber);
+
+        if (!string.IsNullOrWhiteSpace(searchParameters.PhoneNumberType))
+            query = query.Where(c => c.PhoneNumberType == searchParameters.PhoneNumberType);
+
+        if (!string.IsNullOrWhiteSpace(searchParameters.PostalCode))
+            query = query.Where(c => c.PostalCode == searchParameters.PostalCode);
+
+        if (!string.IsNullOrWhiteSpace(searchParameters.StateProvinceName))
+            query = query.Where(c => c.StateProvinceName == searchParameters.StateProvinceName);
+
+        var customers = await query.Take(searchParameters.MaxRecords)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return [.. customers.Select(c => mapper.Map<CustomerViewModel>(c))];
     }
 
     public async Task<CustomerViewModel> UpdateAsync(CustomerViewModel entity, CancellationToken cancellationToken = default)
