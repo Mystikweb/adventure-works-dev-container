@@ -15,9 +15,11 @@
             "cwd": "${workspaceFolder}/src/AdventureWorksDevContainer.Host",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+            // The default path is to the GraphQL Altair UI. This can be changed to launch the Swagger UI by replacing '/ui/altair' with '/ui/swagger/index.html'.
             "serverReadyAction": {
                 "action": "openExternally",
-                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+                "uriFormat": "%s/ui/altair"
             },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
