@@ -34,7 +34,9 @@
 				"ms-dotnettools.vscodeintellicode-csharp",
 				"ms-mssql.mssql",
 				"github.copilot",
-				"github.codespaces",
+				"github.copilot-chat",
+				"github.vscode-github-actions",
+				"github.vscode-pull-request-github",
                 "sonarsource.sonarlint-vscode"
 			],
 
