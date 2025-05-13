@@ -34,7 +34,10 @@
 				"ms-dotnettools.vscodeintellicode-csharp",
 				"ms-mssql.mssql",
 				"github.copilot",
-				"github.codespaces"
+				"github.copilot-chat",
+				"github.vscode-github-actions",
+				"github.vscode-pull-request-github",
+                "sonarsource.sonarlint-vscode"
 			],
 
 			// Set *default* container specific settings.json values on container create.
@@ -53,6 +56,10 @@
 					}
 				],
 				"remote.localPortHost": "allInterfaces",
+                "sonarlint.connectedMode.project": {
+                    "connectionId": "mystikweb",
+                    "projectKey": "Mystikweb_adventure-works-dev-container"
+                },
 				"sqlDatabaseProjects.dotnetSDK Location": "/usr/share/dotnet"
 			}
 		}
